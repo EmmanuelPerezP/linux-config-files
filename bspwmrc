@@ -1,0 +1,50 @@
+#! /bin/sh
+
+sxhkd &
+
+#bspc monitor -d I II III IV V VI VII VIII IX X
+bspc monitor DVI-D-0 -d III IV V VI VII VIII
+bspc monitor HDMI-0 -d I II
+
+bspc config border_width         2
+bspc config window_gap          12
+bspc config top_padding         25
+#bspc config bottom_padding   	25
+
+
+bspc config focused_border_color \#121622
+bspc config normal_border_color \#000000
+#bspc config normal_border_color \#8E1C3B
+#bspc config focused_border_color \#AA3756
+
+
+bspc config click_to_focus		 true
+bspc config split_ratio          0.52
+bspc config borderless_monocle   true
+bspc config gapless_monocle      true
+bspc config focus_by_distance    true
+bspc config history_aware_focus  true
+
+#bspc rule -a Gimp desktop='^8' state=floating follow=on
+#bspc rule -a Gimp state=floating follow=on
+bspc rule -a Chromium desktop='^2'
+bspc rule -a steam desktop '^2' state=pseudo_tiled
+bspc rule -a mplayer2 state=floating
+bspc rule -a Kupfer.py focus=on
+bspc rule -a Screenkey manage=off
+
+# change order of monitors
+
+wmname LG3D
+sh ~/.fehbg &
+$HOME/.config/polybar/launch.sh
+tint2 &
+volumeicon &
+mpd &
+code &
+/opt/urserver/urserver --daemon
+
+bspc wm -O HDMI-0 DVI-D-0 &
+
+exec google-chrome-stable
+
